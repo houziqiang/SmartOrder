@@ -95,6 +95,7 @@
 
 					socket.onmessage = function(e) {
 						$("#scrollDiv ul").html($("#scrollDiv ul").html() + "<li>"+ e.data+"</li>");
+						alert(e.data);
 						
 					};
 				} catch(exception) {

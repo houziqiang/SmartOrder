@@ -12,8 +12,9 @@ Class BookController extends CommonController{
 	Public function index(){
 		//获得桌位预定情况
 	 	$book = D("book");
-	 	//'book_day' =>date("y-m-d") ,
-	 	$condition = array('book_status' => "0" );
+	 	$today=date("y-m-d");
+	 	$condition['book_status'] = 0;
+	 	$condition['book_day'] = array('eq',$today);
 	 	$bookRes = $book->getBook($condition); 
 	 	$res = $book->idToName($bookRes); 
 		$this->assign("bookInfo",$res);
@@ -73,6 +74,16 @@ Class BookController extends CommonController{
 					); 
 		$book = D("book"); 
 		$result = $book->unBook($data);
+		$this->ajaxReturn($result); 
+	}
+	//确认预订
+	Public function confirmBook(){
+		$data = array(  "book_day"=>I("date"), 
+						"book_name"=>I("name"), 
+						"book_time" => I("time") 
+					); 
+		$book = D("book"); 
+		$result = $book->confirm_Book($data);
 		$this->ajaxReturn($result); 
 	}
 
