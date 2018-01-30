@@ -58,6 +58,7 @@
                         <td>{$book.table}</td>
                         <td>{$book.book_demand}</td>
                         <td>
+                             <button type="button" class="btn btn-default confirmBook {$book.book_time} {$book.book_name}" id="{$book.book_day}" >确定到达</button>
                             <button type="button" class="btn btn-default cancelBook {$book.book_time} {$book.book_name}" id="{$book.book_day}" >取消</button>
                         </td>
                     </tr>

@@ -98,6 +98,14 @@ Class BookModel extends Model{
 		} 
 		else return "failed"; 
 	}
+	Public function confirm_Book($condition){  
+		$data=array("book_status"=>2); 
+		$result=$this->dbBook->where($condition)->save($data); 
+		if($result!=null){ 
+			return "success";
+		} 
+		else return "failed"; 
+	}
 	
 }
 

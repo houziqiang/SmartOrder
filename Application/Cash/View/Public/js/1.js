@@ -122,6 +122,7 @@ $(document).ready(function() {
 	//预约查询
 	$("#RVsearch").click(booking);
 	$(".cancelBook").click(cancelBook);
+	$(".confirmBook").click(confirmBook);
 	// //查询空座
 	 $("#searchTable").click(getTable);
 	 //查询本日收入
@@ -202,7 +203,7 @@ function booking(){
 }
 //取消预定
 function cancelBook(){
-	var date = $(this).attr("id");
+	alert("4545");	var date = $(this).attr("id");
 	var className = $(this).attr("class");
 	var classArr = className.split(" ");
 	var time = classArr[3];
@@ -220,6 +221,31 @@ function cancelBook(){
 		setTimeout(function(){
 			$("#alert").show();
 			$("#alert").find(".modal-body").html("取消失败！请核实后取消预定");
+		},5000);
+	}
+
+
+}
+//确定预定到达
+function confirmBook(){
+	var date = $(this).attr("id");
+	var className = $(this).attr("class");
+	var classArr = className.split(" ");
+	var time = classArr[3];
+	var name = classArr[4];
+	var data = {date:date,time:time,name:name};
+	 if(!confirm("该预定顾客是否已到达用餐？"))return;
+	var result = yysAjaxRequest("POST",data,"confirmBook");
+	if(result=="success"){
+		$("#alert").show();
+		$("#alert").find(".modal-body").html("确认成功！");
+		setTimeout(function(){
+			window.location.href = "index";
+		},3000);
+	}else{
+		setTimeout(function(){
+			$("#alert").show();
+			$("#alert").find(".modal-body").html("确认失败！请核实后取消预定");
 		},5000);
 	}
 
